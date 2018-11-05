@@ -14,19 +14,20 @@ import java.util.Iterator;
 import org.jnativehook.keyboard.NativeKeyEvent;
 
 public class Soundboard {
-	private ArrayList<SoundboardEntry> soundboardEntries;
 	private static ArrayList<SoundboardEntry> soundboardEntriesClone = new ArrayList<SoundboardEntry>();
 	private static boolean containsPPTKey = false;
 	private static ArrayList<Integer> pttKeysClone = new ArrayList<Integer>();
+
+	private ArrayList<SoundboardEntry> soundboardEntries;
 
 	public Soundboard() {
 		this.soundboardEntries = new ArrayList<SoundboardEntry>();
 	}
 
 	public Object[][] getEntriesAsObjectArrayForTable() {
-		Object[][] array = new Object[this.soundboardEntries.size()][4];
+		Object[][] array = new Object[soundboardEntries.size()][4];
 		for (int i = 0; i < array.length; i++) {
-			SoundboardEntry entry = (SoundboardEntry) this.soundboardEntries.get(i);
+			SoundboardEntry entry = soundboardEntries.get(i);
 			array[i][0] = entry.getFileName();
 			array[i][1] = entry.getActivationKeysAsReadableString();
 			array[i][2] = entry.getFileString();
@@ -40,7 +41,7 @@ public class Soundboard {
 	}
 
 	public SoundboardEntry getEntry(String filename) {
-		for (SoundboardEntry entry : this.soundboardEntries) {
+		for (SoundboardEntry entry : soundboardEntries) {
 			if (entry.getFileName().equals(filename)) {
 				return entry;
 			}
@@ -49,20 +50,20 @@ public class Soundboard {
 	}
 
 	public void removeEntry(int index) {
-		this.soundboardEntries.remove(index);
+		soundboardEntries.remove(index);
 	}
 
 	public void removeEntry(String filename) {
-		for (SoundboardEntry entry : this.soundboardEntries) {
+		for (SoundboardEntry entry : soundboardEntries) {
 			if (entry.getFileName().equals(filename)) {
-				this.soundboardEntries.remove(entry);
+				soundboardEntries.remove(entry);
 				break;
 			}
 		}
 	}
 
 	public ArrayList<SoundboardEntry> getSoundboardEntries() {
-		return this.soundboardEntries;
+		return soundboardEntries;
 	}
 
 	public File saveAsJsonFile(File file) {
@@ -108,7 +109,7 @@ public class Soundboard {
 
 	public SoundboardEntry getEntry(int index) {
 		try {
-			return (SoundboardEntry) this.soundboardEntries.get(index);
+			return (SoundboardEntry) soundboardEntries.get(index);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
@@ -116,41 +117,36 @@ public class Soundboard {
 		return null;
 	}
 
-	public boolean entriesContainPTTKeys(ArrayList<Integer> pttkeys)
-   {
-     if ((!pttkeys.equals(pttKeysClone)) || (hasSoundboardChanged())) {
-       soundboardEntriesClone = (ArrayList)this.soundboardEntries.clone();
-       pttKeysClone = (ArrayList)pttkeys.clone();
-       String key = null;
-       int j; int i; for (Iterator localIterator1 = this.soundboardEntries.iterator(); localIterator1.hasNext(); 
-           i < j)
-       {
-         SoundboardEntry entry = (SoundboardEntry)localIterator1.next();
-         int[] arrayOfInt; j = (arrayOfInt = entry.getActivationKeys()).length;i = 0; continue;int actKey = arrayOfInt[i];
-         key = NativeKeyEvent.getKeyText(actKey).toLowerCase();
-         for (Iterator localIterator2 = pttkeys.iterator(); localIterator2.hasNext();) { int i = ((Integer)localIterator2.next()).intValue();
-           if (key.equals(KeyEventIntConverter.getKeyEventText(i).toLowerCase())) {
-             containsPPTKey = true;
-             return true;
-           }
-         }
-         i++;
-       }
-       
- 
- 
- 
- 
- 
- 
- 
-       containsPPTKey = false;
-       return false; }
-     if (containsPPTKey) {
-       return true;
-     }
-     return false;
-   }
+	public boolean entriesContainPTTKeys(ArrayList<Integer> pttkeys) {
+		if ((!pttkeys.equals(pttKeysClone)) || (hasSoundboardChanged())) {
+			soundboardEntriesClone = (ArrayList<SoundboardEntry>) soundboardEntries.clone();
+			pttKeysClone = (ArrayList<Integer>) pttkeys.clone();
+			String key = null;
+			int j;
+			int i;
+			for (SoundboardEntry entry : soundboardEntries) {
+				int[] arrayOfInt;
+				j = (arrayOfInt = entry.getActivationKeys()).length;
+				i = 0;
+				continue;
+				int actKey = arrayOfInt[i];
+				key = NativeKeyEvent.getKeyText(actKey).toLowerCase();
+				for (Integer number : pttkeys) {
+					if (key.equals(KeyEventIntConverter.getKeyEventText(number.intValue()).toLowerCase())) {
+						containsPPTKey = true;
+						return true;
+					}
+				}
+				i++;
+			}
+			containsPPTKey = false;
+			return false;
+		}
+		if (containsPPTKey) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean hasSoundboardChanged() {
 		if (!this.soundboardEntries.equals(soundboardEntriesClone)) {
