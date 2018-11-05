@@ -14,9 +14,3 @@ final class JIJConstants
   static final String CURRENT_DIR = "./";
   static final String UTF8_ENCODING = "UTF-8";
 }
-
-
-/* Location:              C:\Users\hunte\Downloads\EXP Soundboard_05.jar!\org\eclipse\jdt\internal\jarinjarloader\JIJConstants.class
- * Java compiler version: 1 (45.3)
- * JD-Core Version:       0.7.1
- */
