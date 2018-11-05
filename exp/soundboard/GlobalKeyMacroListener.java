@@ -149,5 +149,5 @@
          p.play(this.soundboardFrame.audioManager, modspeed);
        }
      }
-   }
- }
+	}
+}
