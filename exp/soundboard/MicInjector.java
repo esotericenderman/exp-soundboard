@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioFormat.Encoding;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine.Info;
+import javax.sound.sampled.DataLine;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.FloatControl.Type;
-import javax.sound.sampled.Line.Info;
+import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
-import javax.sound.sampled.Mixer.Info;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.TargetDataLine;
 import javax.swing.JOptionPane;
@@ -48,7 +47,7 @@ public class MicInjector extends Thread {
 
 	MicInjector()
    {
-     this.inputBuffer = new byte['Ȁ'];
+     this.inputBuffer = new byte['Ȁ']; // TODO: fix character
      this.inputLineName = "none selected";
      this.outputLineName = "none selected";
    }
