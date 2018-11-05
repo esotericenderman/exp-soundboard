@@ -17,6 +17,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioFormat.Encoding;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
 import javax.sound.sampled.DataLine.Info;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
@@ -50,11 +51,11 @@ public class Utils {
 	public static MicInjector micInjector = new MicInjector();
 	private static Robot robot;
 	public static boolean autoPTThold = true;
-	private static ArrayList<Integer> pttkeys = new ArrayList();
+	private static ArrayList<Integer> pttkeys = new ArrayList<Integer>();
 	private static int currentlyPlayingClipCount = 0;
 
-	private static ConcurrentHashMap<String, Long> lastNativeKeyPressMap = new ConcurrentHashMap();
-	private static ConcurrentHashMap<String, Long> lastRobotKeyPressMap = new ConcurrentHashMap();
+	private static ConcurrentHashMap<String, Long> lastNativeKeyPressMap = new ConcurrentHashMap<String, Long>();
+	private static ConcurrentHashMap<String, Long> lastRobotKeyPressMap = new ConcurrentHashMap<String, Long>();
 
 	public static String fileEncoding = System.getProperty("file.encoding");
 
@@ -64,9 +65,9 @@ public class Utils {
 			final SourceDataLine secondarySpeaker) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				Utils.ClipPlayer clip = new Utils.ClipPlayer(Utils.this, primarySpeaker, secondarySpeaker);
+				Utils.ClipPlayer clip = new Utils.ClipPlayer(file, primarySpeaker, secondarySpeaker);
 				if (!Utils.overlapSameClipWhilePlaying) {
-					Utils.stopFilePlaying(Utils.this);
+					Utils.stopFilePlaying(file);
 				}
 				clip.start();
 			}
@@ -74,7 +75,7 @@ public class Utils {
 	}
 
 	public static String[] getMixerNames(DataLine.Info lineInfo) {
-		ArrayList<String> mixerNames = new ArrayList();
+		ArrayList<String> mixerNames = new ArrayList<String>();
 		Mixer.Info[] info = AudioSystem.getMixerInfo();
 		Mixer.Info[] arrayOfInfo1;
 		int j = (arrayOfInfo1 = info).length;
@@ -103,7 +104,7 @@ public class Utils {
 	}
 
 	public static void setStopKey(int stopKey) {
-		stopKey = stopKey;
+		Utils.stopKey = stopKey;
 	}
 
 	public static int getModifiedSpeedKey() {
@@ -111,7 +112,7 @@ public class Utils {
 	}
 
 	public static void setModifiedSpeedKey(int slowKey) {
-		slowKey = slowKey;
+		Utils.slowKey = slowKey;
 	}
 
 	public static void startMicInjector(String inputMixerName, String outputMixerName) {
@@ -128,7 +129,7 @@ public class Utils {
 			}
 		}
 		j = (arrayOfString = MicInjector.getMixerNames(MicInjector.sourceDataLineInfo)).length;
-		for (i = 0; i < j; i++) {
+		for (int i = 0; i < j; i++) {
 			String mixer = arrayOfString[i];
 			if (mixer.equals(outputMixerName)) {
 				outputexists = true;
@@ -170,7 +171,7 @@ public class Utils {
 
 	public static boolean initGlobalKeyLibrary() {
 		try {
-
+			GlobalScreen.registerNativeHook();
 		} catch (NativeHookException ex) {
 			System.err.println("There was a problem registering the native hook.");
 			System.err.println(ex.getMessage());
@@ -182,7 +183,11 @@ public class Utils {
 
 	public static boolean deregisterGlobalKeyLibrary() {
 		if (GlobalScreen.isNativeHookRegistered()) {
-			GlobalScreen.unregisterNativeHook();
+			try {
+				GlobalScreen.unregisterNativeHook();
+			} catch (NativeHookException e) {
+				e.printStackTrace();
+			}
 			return true;
 		}
 		return false;
@@ -216,7 +221,7 @@ public class Utils {
 	}
 
 	public static void setModspeedupKey(int modspeedupKey) {
-		modspeedupKey = modspeedupKey;
+		Utils.modspeedupKey = modspeedupKey;
 	}
 
 	public static int getModspeeddownKey() {
@@ -224,7 +229,7 @@ public class Utils {
 	}
 
 	public static void setModspeeddownKey(int modspeeddownKey) {
-		modspeeddownKey = modspeeddownKey;
+		Utils.modspeeddownKey = modspeeddownKey;
 	}
 
 	public static int getOverlapSwitchKey() {
@@ -232,7 +237,7 @@ public class Utils {
 	}
 
 	public static void setOverlapSwitchKey(int overlapSwitchKey) {
-		overlapSwitchKey = overlapSwitchKey;
+		Utils.overlapSwitchKey = overlapSwitchKey;
 	}
 
 	public static void incrementModSpeedUp() {
@@ -343,7 +348,7 @@ public class Utils {
 	}
 
 	public static void setPTTkeys(Collection<Integer> pTTkeys) {
-		pttkeys = new ArrayList(pTTkeys);
+		pttkeys = new ArrayList<Integer>(pTTkeys);
 	}
 
 	public static boolean isAutoPTThold() {
@@ -351,7 +356,7 @@ public class Utils {
 	}
 
 	public static void setAutoPTThold(boolean autoPTThold) {
-		autoPTThold = autoPTThold;
+		Utils.autoPTThold = autoPTThold;
 	}
 
 	public static synchronized void incrementCurrentClipCount() {
@@ -370,15 +375,15 @@ public class Utils {
 
 	public static ArrayList<Integer> stringToIntArrayList(String string) {
 		String arrayString = string.replace('[', ' ').replace(']', ' ').trim();
-		ArrayList<Integer> array = new ArrayList();
+		ArrayList<Integer> array = new ArrayList<Integer>();
 		String[] numberstring = arrayString.split(",");
 		String[] arrayOfString1;
 		int j = (arrayOfString1 = numberstring).length;
 		for (int i = 0; i < j; i++) {
 			String s = arrayOfString1[i];
 			if (!s.equals("")) {
-				int i = Integer.parseInt(s.trim());
-				array.add(Integer.valueOf(i));
+				int i2 = Integer.parseInt(s.trim());
+				array.add(Integer.valueOf(i2));
 			}
 		}
 		return array;
@@ -495,7 +500,7 @@ public class Utils {
        }
        if (clip != null) {
          Utils.incrementCurrentClipCount();
-         byte[] buffer = new byte['ࠀ'];
+         byte[] buffer = new byte['ࠀ']; // TODO: fix character
          int bytesRead = 0;
          while ((this.playing) && (Utils.PLAYALL)) {
            try {

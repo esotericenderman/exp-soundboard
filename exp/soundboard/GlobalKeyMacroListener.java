@@ -12,7 +12,7 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
 
 	public GlobalKeyMacroListener(SoundboardFrame frame) {
 		this.soundboardFrame = frame;
-		this.pressedKeys = new ArrayList();
+		this.pressedKeys = new ArrayList<Integer>();
 	}
 
 	public void nativeKeyPressed(NativeKeyEvent e) {
@@ -89,8 +89,8 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
 			((SoundboardEntry) potential.get(0)).play(this.soundboardFrame.audioManager, modspeed);
 		} else {
 			int highest = 0;
-			Object potentialCopy = new ArrayList(potential);
-			for (SoundboardEntry p : (ArrayList) potentialCopy) {
+			ArrayList<SoundboardEntry> potentialCopy = new ArrayList<SoundboardEntry>(potential);
+			for (SoundboardEntry p : potentialCopy) {
 				int matches = p.matchesHowManyPressed(this.pressedKeys);
 				if (matches > highest) {
 					highest = matches;
@@ -98,8 +98,8 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
 					potential.remove(p);
 				}
 			}
-			potentialCopy = new ArrayList(potential);
-			for (SoundboardEntry p : (ArrayList) potentialCopy) {
+			potentialCopy = new ArrayList<SoundboardEntry>(potential);
+			for (SoundboardEntry p : potentialCopy) {
 				int matches = p.matchesHowManyPressed(this.pressedKeys);
 				if (matches < highest) {
 					potential.remove(p);

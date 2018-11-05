@@ -105,8 +105,8 @@ public class SoundboardEntry {
 		int[] arrayOfInt;
 		int j = (arrayOfInt = getActivationKeys()).length;
 		for (int i = 0; i < j; i++) {
-			int i = arrayOfInt[i];
-			s = s.concat(NativeKeyEvent.getKeyText(i) + "+");
+			int i2 = arrayOfInt[i];
+			s = s.concat(NativeKeyEvent.getKeyText(i2) + "+");
 		}
 		s = s.substring(0, s.length() - 1);
 		return s;

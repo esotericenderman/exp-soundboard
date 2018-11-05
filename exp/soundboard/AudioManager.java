@@ -28,8 +28,6 @@ public class AudioManager {
 	void playSoundClip(File file, boolean halfspeed) {
 		AudioFormat format;
 
-		AudioFormat format;
-
 		if (halfspeed) {
 			format = Utils.modifiedPlaybackFormat;
 		} else {

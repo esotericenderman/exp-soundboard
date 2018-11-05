@@ -15,12 +15,12 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 
 public class Soundboard {
 	private ArrayList<SoundboardEntry> soundboardEntries;
-	private static ArrayList<SoundboardEntry> soundboardEntriesClone = new ArrayList();
+	private static ArrayList<SoundboardEntry> soundboardEntriesClone = new ArrayList<SoundboardEntry>();
 	private static boolean containsPPTKey = false;
-	private static ArrayList<Integer> pttKeysClone = new ArrayList();
+	private static ArrayList<Integer> pttKeysClone = new ArrayList<Integer>();
 
 	public Soundboard() {
-		this.soundboardEntries = new ArrayList();
+		this.soundboardEntries = new ArrayList<SoundboardEntry>();
 	}
 
 	public Object[][] getEntriesAsObjectArrayForTable() {

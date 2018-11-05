@@ -221,7 +221,7 @@ public class MicInjector extends Thread {
      double dB = 0.0D;
      for (int i = 0; i < buffer.length; i++) {
        dB = 20.0D * Math.log10(Math.abs(buffer[i] / 32767.0D));
-       if ((dB == Double.NEGATIVE_INFINITY) || (dB == NaN.0D)) {
+       if ((dB == Double.NEGATIVE_INFINITY) || (dB == NaN.0D)) { // TODO: fix this value
          dB = -90.0D;
        }
      }
@@ -236,7 +236,7 @@ public class MicInjector extends Thread {
      ByteBuffer.wrap(buffer).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shortArray);
      for (int i = 0; i < shortArray.length; i++) {
        dB = 20.0D * Math.log10(Math.abs(shortArray[i] / 32767.0D));
-       if ((dB == Double.NEGATIVE_INFINITY) || (dB == NaN.0D)) {
+       if ((dB == Double.NEGATIVE_INFINITY) || (dB == NaN.0D)) { // TODO: fix this value
          dB = -90.0D;
        }
      }
