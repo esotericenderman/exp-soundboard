@@ -26,6 +26,23 @@ public class SoundboardStage extends Application {
 
 	static Logger rootLogger = Logger.getLogger("");
 
+	/**
+	 * Opens a simple error dialog with an OK button, must be called on the JavaFX Thread.
+	 * This method is blocking and will wait for the user to close it.
+	 * @param message Text to be shown to the user.
+	 */
+	public static void throwBlockingError(String message) {
+		new Alert(Alert.AlertType.ERROR, message, ButtonType.OK).showAndWait();
+	}
+
+	/**
+	 * Opens a simple error dialog with an Ok button, must be called on the JavaFX Thread.
+	 * @param message Text to be shown to the user.
+	 */
+	public static void throwError(String message) {
+		new Alert(Alert.AlertType.ERROR, message, ButtonType.OK).show();
+	}
+
 	private SoundboardModel model;
 	private Logger logger;
 
@@ -89,27 +106,15 @@ public class SoundboardStage extends Application {
 		errHand.setFilter(errFilt);
 		rootLogger.addHandler(errHand);
 
-		// logging System.out to file
+		// logging everything to file
 		try {
 			// logging to file
 			FileHandler fHand = new FileHandler("stdout.txt");
 			fHand.setFormatter(new LogFormatter());
-			fHand.setFilter(outFilt);
 			rootLogger.addHandler(fHand);
 		} catch (IOException ioe) {
 			rootLogger.log(Level.SEVERE, "Failed starting log to stdout.txt", ioe);
 			// TODO: exit if failed to log to file? raise to user?
-		}
-
-		// logging System.err to file
-		try {
-			// logging to file
-			FileHandler fHand = new FileHandler("stderr.txt");
-			fHand.setFormatter(new LogFormatter());
-			fHand.setFilter(errFilt);
-			rootLogger.addHandler(fHand);
-		} catch (IOException ioe) {
-			rootLogger.log(Level.SEVERE, "Failed starting log to stdout.txt", ioe);
 		}
 
 		// setting the jnativehook logger to only log what's important
@@ -188,7 +193,7 @@ public class SoundboardStage extends Application {
 		settingsStage.setScene(settingsScene);
 		settingsStage.initOwner(menuStage);
 		settingsStage.initModality(Modality.WINDOW_MODAL);
-		settingsController.preload(this,settingsStage, settingsScene);
+		settingsController.preload(this, settingsStage, settingsScene);
 
 		entryScene = new Scene(entryMenu);
 		entryStage = new Stage();
@@ -222,21 +227,12 @@ public class SoundboardStage extends Application {
 		System.exit(0);
 	}
 
-	private static void startNativeKey() {
-		try {
-			GlobalScreen.registerNativeHook();
-		} catch (NativeHookException nhe) {
-			rootLogger.log(Level.SEVERE, "Failed to register jnativehook!", nhe);
-			// TODO: exit on failure? report to user? relaunch?
-		}
+	private static void startNativeKey() throws NativeHookException {
+		GlobalScreen.registerNativeHook();
 	}
 
-	private static void stopNativeKey() {
-		try {
-			GlobalScreen.unregisterNativeHook();
-		} catch (NativeHookException nhe) {
-			rootLogger.log(Level.SEVERE, "Failed to unregister jnativehook!", nhe);
-		}
+	private static void stopNativeKey() throws NativeHookException {
+		GlobalScreen.unregisterNativeHook();
 	}
 
 	public MenuController menuController() {
@@ -261,23 +257,6 @@ public class SoundboardStage extends Application {
 
 	public SoundboardModel getModel() {
 		return model;
-	}
-
-	/**
-	 * Opens a simple error dialog with an OK button, must be called on the JavaFX Thread.
-	 * This method is blocking and will wait for the user to close it.
-	 * @param message Text to be shown to the user.
-	 */
-	public void throwBlockingError(String message) {
-		new Alert(Alert.AlertType.ERROR, message, ButtonType.OK).showAndWait();
-	}
-
-	/**
-	 * Opens a simple error dialog with an Ok button, must be called on the JavaFX Thread.
-	 * @param message Text to be shown to the user.
-	 */
-	public void throwError(String message) {
-		new Alert(Alert.AlertType.ERROR, message, ButtonType.OK).show();
 	}
 
 }
