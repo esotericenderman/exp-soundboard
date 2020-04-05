@@ -66,16 +66,11 @@ public class AudioMaster {
 		}
 	}
 
-	public static boolean startMP3Decoder() {
+	public static void startMP3Decoder() throws IOException, UnsupportedAudioFileException {
 		InputStream loaderFile = AudioMaster.class.getClassLoader().getResourceAsStream("loader.mp3");
-		try {
-			AudioSystem.getAudioFileFormat(loaderFile);
-			AudioInputStream stream = AudioSystem.getAudioInputStream(loaderFile);
-			stream.close();
-			return true;
-		} catch (UnsupportedAudioFileException | IOException e) {
-			return false;
-		}
+		AudioSystem.getAudioFileFormat(loaderFile);
+		AudioInputStream stream = AudioSystem.getAudioInputStream(loaderFile);
+		stream.close();
 	}
 
 	//private AudioFormat modDecodeFormat; // TODO format for modified speed, mult samplerate by float in [0,1]
