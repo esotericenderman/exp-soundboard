@@ -21,6 +21,7 @@ import javafx.stage.FileChooser;
 import ca.exp.soundboard.remake.model.Entry;
 import ca.exp.soundboard.remake.model.EntryListener;
 import ca.exp.soundboard.remake.util.FileIO;
+import org.jnativehook.keyboard.NativeKeyListener;
 
 public class EntryController extends GuiController {
 
@@ -35,10 +36,9 @@ public class EntryController extends GuiController {
 
     // --- Working Data --- //
 
-	private EntryListener listener;
-	private NativeKeyEvent nativeEvent;
+	private NativeKeyListener listener;
 	private FileChooser chooser;
-	private File workFile;
+	private Entry workFile;
 
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
@@ -140,7 +140,7 @@ public class EntryController extends GuiController {
 	// --- General Methods --- //
 
     @Override
-    void preload(SoundboardStage parent, Stage stage, Scene scene) {
+    protected void preload(SoundboardStage parent, Stage stage, Scene scene) {
         super.preload(parent, stage, scene);
 		logger.log(Level.INFO, "Initializing entry controller");
 
@@ -148,6 +148,23 @@ public class EntryController extends GuiController {
         chooser = new FileChooser();
         chooser.setTitle("Choose Audio File");
         chooser.getExtensionFilters().addAll(FileIO.standard_audio, FileIO.all_files);
+
+        listener = new NativeKeyListener() {
+			@Override
+			public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
+
+			}
+
+			@Override
+			public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
+
+			}
+
+			@Override
+			public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
+
+			}
+		}
 
         // setup listener for catching a hotkey
         try {
@@ -206,9 +223,10 @@ public class EntryController extends GuiController {
 	}
 
 	@Override
-	public void forceStop() {
-		super.forceStop();
+	protected void handleForceStop() {
+		if (listener.isListening()) stopListening();
 		nativeEvent = null;
 		workFile = null;
 	}
+
 }
