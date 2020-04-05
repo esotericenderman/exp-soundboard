@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.exp.soundboard.remake.gui.EntryController">
+<Pane maxHeight="170.0" maxWidth="525.0" minHeight="170.0" minWidth="525.0" prefHeight="170.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.exp.soundboard.remake.gui.EntryController">
    <children>
       <AnchorPane prefHeight="170.0" prefWidth="525.0">
          <children>

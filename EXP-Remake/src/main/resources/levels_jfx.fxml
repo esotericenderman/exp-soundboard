@@ -6,8 +6,7 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="272.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.exp.soundboard.remake.gui.LevelsController">
+<VBox maxHeight="272.0" maxWidth="445.0" minHeight="272.0" minWidth="445.0" prefHeight="272.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.exp.soundboard.remake.gui.LevelsController">
    <children>
       <VBox>
          <children>
