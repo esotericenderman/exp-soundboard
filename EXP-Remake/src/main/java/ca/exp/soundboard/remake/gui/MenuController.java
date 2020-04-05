@@ -311,7 +311,7 @@ public class MenuController extends GuiController implements ListChangeListener<
 	}
 
 	@Override
-	void preload(SoundboardStage parent, Stage stage, Scene scene) {
+	protected void preload(SoundboardStage parent, Stage stage, Scene scene) {
 		super.preload(parent, stage, scene);
 		logger.info( "Initializing main menu controller");
 
@@ -413,5 +413,10 @@ public class MenuController extends GuiController implements ListChangeListener<
 	public void stop() {
 		stage.close();
 		active = false;
+	}
+
+	@Override
+	protected void handleForceStop() {
+
 	}
 }

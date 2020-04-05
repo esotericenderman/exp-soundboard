@@ -45,7 +45,7 @@ public class LevelsController extends GuiController {
     // --- General Methods --- //
 
     @Override
-    void preload(SoundboardStage parent, Stage stage, Scene scene) {
+    protected void preload(SoundboardStage parent, Stage stage, Scene scene) {
         super.preload(parent, stage, scene);
         logger.log(Level.INFO, "Initializing level controller");
 
@@ -113,5 +113,10 @@ public class LevelsController extends GuiController {
         } else {
             logger.info("Cannot close closed controller!");
         }
+    }
+
+    @Override
+    protected void handleForceStop() {
+
     }
 }

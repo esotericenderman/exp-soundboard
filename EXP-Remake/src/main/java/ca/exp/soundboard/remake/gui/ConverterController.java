@@ -127,7 +127,7 @@ public class ConverterController extends GuiController {
 	}
 
 	@Override
-	void preload(SoundboardStage parent, Stage stage, Scene scene) {
+	protected void preload(SoundboardStage parent, Stage stage, Scene scene) {
 		super.preload(parent, stage, scene);
 		logger.info( "Initializing converter controller");
 
@@ -158,6 +158,11 @@ public class ConverterController extends GuiController {
 	@Override
 	public void stop() {
 		stage.close();
+	}
+
+	@Override
+	protected void handleForceStop() {
+
 	}
 
 }

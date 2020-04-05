@@ -30,7 +30,7 @@ public abstract class GuiController {
      * @param stage The window this ca.exp.soundboard.gui will run in.
      * @param scene The scene all the GUI's elements are loaded into.
      */
-    void preload(SoundboardStage parent, Stage stage, Scene scene) {
+    protected void preload(SoundboardStage parent, Stage stage, Scene scene) {
         this.parent = parent;
         this.stage = stage;
         this.scene = scene;
@@ -42,18 +42,21 @@ public abstract class GuiController {
         Handler guiOutput = new Handler() {
             @Override
             public void publish(LogRecord record) {
-                if (record.getLevel() == Level.WARNING || record.getLevel() == Level.SEVERE)
-                    parent.throwError(record.getMessage());
+                if (record.getLevel() == Level.WARNING) {
+                    SoundboardStage.throwError(record.getMessage());
+                } else if (record.getLevel() == Level.SEVERE) {
+                    SoundboardStage.throwBlockingError(record.getMessage());
+                }
             }
 
             @Override
             public void flush() {
-
+                // TODO: make queue for raising errors to user, rather than spamming them
             }
 
             @Override
             public void close() throws SecurityException {
-
+                // TODO: allow disabling popup alerts
             }
         };
         guiOutput.setLevel(Level.WARNING);
@@ -77,8 +80,11 @@ public abstract class GuiController {
 
     public abstract void stop();
 
+    protected abstract void handleForceStop();
+
     public void forceStop() {
         logger.info( "Force stopping " + this.getClass().getName());
+        handleForceStop();
         stage.close();
         active = false;
     }

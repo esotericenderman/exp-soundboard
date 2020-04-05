@@ -198,7 +198,7 @@ public class SettingsController extends GuiController {
 	// --- General Methods --- //
 
 	@Override
-	void preload(SoundboardStage parent, Stage stage, Scene scene) {
+	protected void preload(SoundboardStage parent, Stage stage, Scene scene) {
 		super.preload(parent, stage, scene);
 
 		try {
@@ -228,8 +228,10 @@ public class SettingsController extends GuiController {
 		// if anything changed (or if settings holder noticed changes) send it to the settings
 	}
 
-
-
+	@Override
+	protected void handleForceStop() {
+		if (listener.isListening()) stopListening(selectedField);
+	}
 
 
 }
