@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox minHeight="340.0" minWidth="480.0" prefHeight="340.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.exp.soundboard.remake.gui.SettingsController">
+<VBox maxHeight="340.0" maxWidth="480.0" minHeight="340.0" minWidth="480.0" prefHeight="340.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.exp.soundboard.remake.gui.SettingsController">
    <children>
       <VBox>
          <children>
