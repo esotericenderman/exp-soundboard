@@ -6,7 +6,7 @@ import org.jnativehook.keyboard.NativeKeyEvent;
 
 public class Entry {
 
-	public static long invalidId = 0;
+	public static long invalidId = -1;
 	private static long idCounter = 0;
 
 	private static long createId() {
@@ -18,9 +18,7 @@ public class Entry {
 	private final Long localId;
 
 	public Entry(File file, NativeKeyEvent nativeKey) {
-		combo = new KeyCombination(nativeKey);
-		this.file = file;
-		localId = createId();
+		this(file, new KeyCombination(nativeKey));
 	}
 
 	public Entry(File file, KeyCombination combo) {
