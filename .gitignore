@@ -64,3 +64,14 @@ stderr.txt
 stderr.txt.lck
 stdout.txt
 stdout.txt.lck
+
+# Gradle
+gradlew
+gradlew.bat
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+*.jar

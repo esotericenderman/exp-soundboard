@@ -1,0 +1,13 @@
+[versions]
+gson = "2.12.0"
+jnativehook = "2.0.2"
+jave = "3.5.0"
+miglayout = "5.0"
+apple = "1.4"
+
+[libraries]
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jnativehook = { module = "com.1stleg:jnativehook", version.ref = "jnativehook" }
+jave = { module = "ws.schild:jave-all-deps", version.ref = "jave" }
+miglayout = { module = "com.miglayout:miglayout-swing", version.ref = "miglayout" }
+apple = { module = "com.apple:AppleJavaExtensions", version.ref = "apple" }

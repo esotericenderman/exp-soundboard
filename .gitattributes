@@ -1,41 +1,11 @@
-# Handle line endings automatically for files detected as text
-# and leave all files detected as binary untouched.
-* text=auto
-
 #
-# The above will handle all files NOT found below
+# https://help.github.com/articles/dealing-with-line-endings/
 #
-# These files are text and should be normalized (Convert crlf => lf)
-*.css           text
-*.df            text
-*.htm           text
-*.html          text
-*.java          text
-*.js            text
-*.json          text
-*.jsp           text
-*.jspf          text
-*.jspx          text
-*.properties    text
-*.sh            text
-*.tld           text
-*.txt           text
-*.tag           text
-*.tagx          text
-*.xml           text
-*.yml           text
+# Linux start script should use lf
+/gradlew        text eol=lf
 
-# These files are binary and should be left untouched
-# (binary is a macro for -text -diff)
-*.class         binary
-*.dll           binary
-*.ear           binary
-*.gif           binary
-*.ico           binary
+# These are Windows script files and should use crlf
+*.bat           text eol=crlf
+
+# Binary files should be left untouched
 *.jar           binary
-*.jpg           binary
-*.jpeg          binary
-*.png           binary
-*.so            binary
-*.war           binary
-

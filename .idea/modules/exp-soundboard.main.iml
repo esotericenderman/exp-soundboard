@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="exp-soundboard:main" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../build/classes/java/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="jdk" jdkName="jbr-21" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.12.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.1stleg:jnativehook:2.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-all-deps:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.miglayout:miglayout-swing:5.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.apple:AppleJavaExtensions:1.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.36.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-core:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-win32:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-win64:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-linux32:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-linux64:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-osx64:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-osxm1:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-linux-arm32:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: ws.schild:jave-nativebin-linux-arm64:3.5.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.miglayout:miglayout-core:5.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.36" level="project" />
+  </component>
+</module>
