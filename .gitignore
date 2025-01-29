@@ -1,4 +1,7 @@
+# Build Output
+/target
 
+# Temporary and not unimportant files
 .metadata
 bin/
 out/
