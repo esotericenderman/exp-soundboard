@@ -60,7 +60,7 @@ public class SoundboardFrame extends JFrame {
 
     private static final String AUDIO_CONVERTER_NOT_SUPPORTED_MESSAGE = "Audio Converter currently not supported on Mac OS X";
 
-    public static final Image icon = new ImageIcon(SoundboardFrame.class.getResource("/EXP logo.png")).getImage();
+    public static final Image icon = new ImageIcon(SoundboardFrame.class.getResource("/logo.png")).getImage();
     private static final long serialVersionUID = 8934802095461138592L;
     public static Soundboard soundboard;
     public static GlobalKeyMacroListener macroListener;
