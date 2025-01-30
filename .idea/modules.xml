@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/esotericenderman.exp-soundboard.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/esotericenderman.exp-soundboard.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/esotericenderman.exp-soundboard.test.iml" filepath="$PROJECT_DIR$/.idea/modules/esotericenderman.exp-soundboard.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/exp-rewrite.iml" filepath="$PROJECT_DIR$/exp-rewrite.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/exp-soundboard.iml" filepath="$PROJECT_DIR$/.idea/modules/exp-soundboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/exp-soundboard.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/exp-soundboard.app.iml" />
