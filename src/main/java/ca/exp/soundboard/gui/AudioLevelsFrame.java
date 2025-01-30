@@ -66,12 +66,10 @@ public class AudioLevelsFrame extends JFrame {
         JLabel lblSecondaryOutputGain = new JLabel(SECONDARY_OUTPUT_GAIN_LABEL);
 
         secondarySlider = new JSlider();
-        secondarySlider.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent event) {
-                if (!secondarySlider.getValueIsAdjusting()) {
-                    float gain = secondarySlider.getValue();
-                    AudioManager.setSecondOutputGain(gain);
-                }
+        secondarySlider.addChangeListener(_ -> {
+            if (!secondarySlider.getValueIsAdjusting()) {
+                float gain = secondarySlider.getValue();
+                AudioManager.setSecondOutputGain(gain);
             }
         });
 
@@ -90,12 +88,10 @@ public class AudioLevelsFrame extends JFrame {
         JLabel micInjectorGainLabel = new JLabel(MIC_INJECTOR_GAIN_LABEL);
 
         micInjectorSlider = new JSlider();
-        micInjectorSlider.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent event) {
-                if (!micInjectorSlider.getValueIsAdjusting()) {
-                    float gain = micInjectorSlider.getValue();
-                    Utils.setMicInjectorGain(gain);
-                }
+        micInjectorSlider.addChangeListener(_ -> {
+            if (!micInjectorSlider.getValueIsAdjusting()) {
+                float gain = micInjectorSlider.getValue();
+                Utils.setMicInjectorGain(gain);
             }
         });
 

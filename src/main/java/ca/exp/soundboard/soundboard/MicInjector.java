@@ -75,22 +75,6 @@ public class MicInjector extends Thread {
         return mixerNames.toArray(returnArray);
     }
 
-    public static float getdB(byte[] buffer) {
-        double dB = 0.0D;
-        short[] shortArray = new short[buffer.length / 2];
-        ByteBuffer.wrap(buffer).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shortArray);
-
-        for (int i = 0; i < shortArray.length; i++) {
-            dB = 20.0D * Math.log10(Math.abs(shortArray[i] / 32767.0D));
-            if ((dB == Double.NEGATIVE_INFINITY) || (dB == Double.NaN)) { // (dB == NaN.0D)) { // TODO: fix this value
-                dB = -90.0D;
-            }
-        }
-
-        float level = (float) dB + 91.0F;
-        return level;
-    }
-
     @Deprecated
     public static short[] byteToShortArray(byte[] byteArray) {
         short[] shortArray = new short[byteArray.length / 2];
@@ -199,40 +183,6 @@ public class MicInjector extends Thread {
 
     public boolean isRunning() {
         return run;
-    }
-
-    synchronized void setBypass(boolean bypass) {
-        this.bypass = bypass;
-    }
-
-    synchronized void setFadeOut(boolean fadeOut) {
-    }
-
-    synchronized void setMute(boolean mute) {
-        muted = mute;
-        if (muted) {
-            bypass = false;
-        }
-    }
-
-    boolean isMuted() {
-        return muted;
-    }
-
-    public void resetGain() {
-        gainControl.setValue(userVolume);
-    }
-
-    public boolean isBypassing() {
-        return bypass;
-    }
-
-    public String getSelectedInputLineName() {
-        return inputLineName;
-    }
-
-    public String getSelectedOutputLineName() {
-        return outputLineName;
     }
 
     public void stopRunning() {

@@ -30,7 +30,6 @@ import javax.swing.SwingUtilities;
 
 public class Utils {
 
-    public static final int BUFFER_SIZE = 2048;
     public static final float STANDARD_SAMPLE_RATE = 44100.0F;
 
     public static final float MODIFIED_SPEED_INCREMENT = 0.05F;
@@ -385,10 +384,6 @@ public class Utils {
         pttKeys = new ArrayList<Integer>(pTTkeys);
     }
 
-    public static boolean isAutoPTThold() {
-        return autoPTThold;
-    }
-
     public static void setAutoPTThold(boolean autoPTThold) {
         Utils.autoPTThold = autoPTThold;
     }
@@ -496,10 +491,6 @@ public class Utils {
         }
 
         return stopped;
-    }
-
-    public MicInjector getMicInjector() {
-        return micInjector;
     }
 
     private static class ClipPlayer extends Thread {

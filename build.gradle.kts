@@ -28,6 +28,10 @@ tasks {
             attributes["Main-Class"] = application.mainClass
         }
     }
+
+    compileJava {
+        options.compilerArgs.add("--enable-preview")
+    }
 }
 
 java {

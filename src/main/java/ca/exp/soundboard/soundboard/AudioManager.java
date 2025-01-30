@@ -114,10 +114,6 @@ public class AudioManager {
         useSecondary = use;
     }
 
-    public boolean useSecondary() {
-        return useSecondary;
-    }
-
     public synchronized void setSecondaryOutputMixer(String mixerName) {
         String[] mixers = Utils.getMixerNames(standardDataLineInfo);
         int mixerCount = mixers.length;

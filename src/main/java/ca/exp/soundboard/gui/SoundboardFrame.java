@@ -113,38 +113,26 @@ public class SoundboardFrame extends JFrame {
         macInit();
 
         secondarySpeakerComboBox = new JComboBox<>();
-        secondarySpeakerComboBox.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent itemEvent) {
-                if (itemEvent.getStateChange() == 1) {
-                    String name = (String) secondarySpeakerComboBox.getSelectedItem();
-                    audioManager.setSecondaryOutputMixer(name);
-                }
+        secondarySpeakerComboBox.addItemListener(itemEvent -> {
+            if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+                String name = (String) secondarySpeakerComboBox.getSelectedItem();
+                audioManager.setSecondaryOutputMixer(name);
             }
         });
 
         primarySpeakerComboBox = new JComboBox<>();
-        primarySpeakerComboBox.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent itemEvent) {
-                if (itemEvent.getStateChange() == 1) {
-                    String name = (String) primarySpeakerComboBox.getSelectedItem();
-                    audioManager.setPrimaryOutputMixer(name);
-                }
+        primarySpeakerComboBox.addItemListener(itemEvent -> {
+            if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+                String name = (String) primarySpeakerComboBox.getSelectedItem();
+                audioManager.setPrimaryOutputMixer(name);
             }
         });
 
         JButton stopButton = new JButton(STOP_ALL_BUTTON);
-        stopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                Utils.stopAllClips();
-            }
-        });
+        stopButton.addActionListener(_ -> Utils.stopAllClips());
 
         useSecondaryCheckBox = new JCheckBox(USE_CHECKBOX);
-        useSecondaryCheckBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                audioManager.setUseSecondary(useSecondaryCheckBox.isSelected());
-            }
-        });
+        useSecondaryCheckBox.addActionListener(_ -> audioManager.setUseSecondary(useSecondaryCheckBox.isSelected()));
 
         JScrollPane scrollPane = new JScrollPane();
 
@@ -157,11 +145,9 @@ public class SoundboardFrame extends JFrame {
         });
 
         useMicInjectorCheckBox = new JCheckBox(USE_MIC_INJECTOR_CHECKBOX);
-        useMicInjectorCheckBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                SoundboardFrame.useMicInjector = useMicInjectorCheckBox.isSelected();
-                updateMicInjector();
-            }
+        useMicInjectorCheckBox.addActionListener(event -> {
+            SoundboardFrame.useMicInjector = useMicInjectorCheckBox.isSelected();
+            updateMicInjector();
         });
 
         JLabel firstoutputLabel = new JLabel(FIRST_OUTPUT_LABEL);
@@ -243,17 +229,15 @@ public class SoundboardFrame extends JFrame {
         getContentPane().add(editButton, "cell 2 1,alignx left,aligny top");
 
         JButton btnPlay = new JButton(PLAY_BUTTON);
-        btnPlay.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                int selected = table.getSelectedRow();
-                if (selected > -1) {
-                    int index = getSelectedEntryIndex();
-                    SoundboardEntry entry = SoundboardFrame.soundboard.getEntry(index);
-                    if (SoundboardFrame.macroListener.isSpeedModKeyHeld()) {
-                        entry.play(audioManager, true);
-                    } else {
-                        entry.play(audioManager, false);
-                    }
+        btnPlay.addActionListener(_ -> {
+            int selected = table.getSelectedRow();
+            if (selected > -1) {
+                int index = getSelectedEntryIndex();
+                SoundboardEntry entry = SoundboardFrame.soundboard.getEntry(index);
+                if (SoundboardFrame.macroListener.isSpeedModKeyHeld()) {
+                    entry.play(audioManager, true);
+                } else {
+                    entry.play(audioManager, false);
                 }
             }
         });
@@ -278,19 +262,11 @@ public class SoundboardFrame extends JFrame {
         menuBar.add(fileMenu);
 
         JMenuItem newMenuItem = new JMenuItem(NEW_MENU_ITEM);
-        newMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                fileNew();
-            }
-        });
+        newMenuItem.addActionListener(_ -> fileNew());
         fileMenu.add(newMenuItem);
 
         JMenuItem openMenuItem = new JMenuItem(OPEN_MENU_ITEM);
-        openMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                fileOpen();
-            }
-        });
+        openMenuItem.addActionListener(_ -> fileOpen());
         fileMenu.add(openMenuItem);
 
         JSeparator separator = new JSeparator();
@@ -298,32 +274,22 @@ public class SoundboardFrame extends JFrame {
 
         JMenuItem saveMenuItem = new JMenuItem(SAVE_MENU_ITEM);
         saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(83, 2));
-        saveMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                fileSave();
-            }
-        });
+        saveMenuItem.addActionListener(_ -> fileSave());
         fileMenu.add(saveMenuItem);
 
         JMenuItem saveAsMenuItem = new JMenuItem(SAVE_AS_MENU_ITEM);
-        saveAsMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                fileSaveAs();
-            }
-        });
+        saveAsMenuItem.addActionListener(_ -> fileSaveAs());
         fileMenu.add(saveAsMenuItem);
 
         JSeparator jSeparatorB = new JSeparator();
         fileMenu.add(jSeparatorB);
 
         JMenuItem projectPageMenuItem = new JMenuItem(SOURCEFORGE_PAGE_MENU_ITEM);
-        projectPageMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                try {
-                    Desktop.getDesktop().browse(new URI(PROJECT_LINK));
-                } catch (IOException | URISyntaxException exception) {
-                    exception.printStackTrace();
-                }
+        projectPageMenuItem.addActionListener(_ -> {
+            try {
+                Desktop.getDesktop().browse(new URI(PROJECT_LINK));
+            } catch (IOException | URISyntaxException exception) {
+                exception.printStackTrace();
             }
         });
         fileMenu.add(projectPageMenuItem);
@@ -332,22 +298,14 @@ public class SoundboardFrame extends JFrame {
         fileMenu.add(separatorA);
 
         JMenuItem quitMenuItem = new JMenuItem(QUIT_MENU_ITEM);
-        quitMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                exit();
-            }
-        });
+        quitMenuItem.addActionListener(_ -> exit());
         fileMenu.add(quitMenuItem);
 
         JMenu editMenu = new JMenu(OPTION_MENU);
         menuBar.add(editMenu);
 
         JMenuItem settingsMenuItem = new JMenuItem(SETTINGS_MENU_ITEM);
-        settingsMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                getSettingsMenu();
-            }
-        });
+        settingsMenuItem.addActionListener(_ -> getSettingsMenu());
         editMenu.add(settingsMenuItem);
 
         JMenuItem audioLevelsMenuItem = new JMenuItem(AUDIO_LEVELS_MENU_ITEM);
@@ -362,13 +320,11 @@ public class SoundboardFrame extends JFrame {
         editMenu.add(separatorC);
 
         JMenuItem audioConverterMenuItem = new JMenuItem(AUDIO_CONVERTER_MENU_ITEM);
-        audioConverterMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
-                    new ConverterFrame();
-                } else {
-                    JOptionPane.showMessageDialog(null, AUDIO_CONVERTER_NOT_SUPPORTED_MESSAGE, "Feature not supported", 1);
-                }
+        audioConverterMenuItem.addActionListener(_ -> {
+            if (!System.getProperty("os.name").toLowerCase().contains("mac")) {
+                new ConverterFrame();
+            } else {
+                JOptionPane.showMessageDialog(null, AUDIO_CONVERTER_NOT_SUPPORTED_MESSAGE, "Feature not supported", 1);
             }
         });
 

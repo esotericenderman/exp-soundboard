@@ -34,42 +34,30 @@ public class AudioConverter {
 
     public static void batchConvertToMP3(File[] inputFiles, final File outputFolder,
             final EncoderProgressListener listener) {
-        new Thread(new Runnable() {
-            public void run() {
-                for (File input : inputFiles) {
-                    File output = AudioConverter.getAbsoluteForOutputExtensionAndFolder(input, outputFolder, MP3_FILE_EXTENSION);
-                    AudioConverter.mp3(input, output, listener);
-                }
+        new Thread(() -> {
+            for (File input : inputFiles) {
+                File output = AudioConverter.getAbsoluteForOutputExtensionAndFolder(input, outputFolder, MP3_FILE_EXTENSION);
+                AudioConverter.mp3(input, output, listener);
             }
         }).start();
     }
 
     public static void batchConvertToWAV(File[] inputFiles, final File outputFolder,
             final EncoderProgressListener listener) {
-        new Thread(new Runnable() {
-            public void run() {
-                for (File input : inputFiles) {
-                    File output = AudioConverter.getAbsoluteForOutputExtensionAndFolder(input, outputFolder, WAV_FILE_EXTENSION);
-                    AudioConverter.wav(input, output, listener);
-                }
+        new Thread(() -> {
+            for (File input : inputFiles) {
+                File output = AudioConverter.getAbsoluteForOutputExtensionAndFolder(input, outputFolder, WAV_FILE_EXTENSION);
+                AudioConverter.wav(input, output, listener);
             }
         }).start();
     }
 
     public static void convertToMP3(File inputFile, final File outputFile, final EncoderProgressListener listener) {
-        new Thread(new Runnable() {
-            public void run() {
-                AudioConverter.mp3(inputFile, outputFile, listener);
-            }
-        }).start();
+        new Thread(() -> AudioConverter.mp3(inputFile, outputFile, listener)).start();
     }
 
     public static void convertToWAV(File inputFile, final File outputFile, final EncoderProgressListener listener) {
-        new Thread(new Runnable() {
-            public void run() {
-                AudioConverter.wav(inputFile, outputFile, listener);
-            }
-        }).start();
+        new Thread(() -> AudioConverter.wav(inputFile, outputFile, listener)).start();
     }
 
     private static void mp3(File inputFile, File outputFile, EncoderProgressListener listener) {

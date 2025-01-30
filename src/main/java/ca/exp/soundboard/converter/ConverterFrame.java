@@ -138,47 +138,45 @@ public class ConverterFrame extends JFrame {
         outputFileLabel = new JLabel(NONE_SELECTED_MESSAGE);
 
         changeOutputButton = new JButton(CHANGE_BUTTON);
-        changeOutputButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (inputFiles != null && outputFile != null) {
-                    JFileChooser fileChooser = Utils.getFileChooser();
-                    fileChooser.setMultiSelectionEnabled(false);
+        changeOutputButton.addActionListener(_ -> {
+            if (inputFiles != null && outputFile != null) {
+                JFileChooser fileChooser = Utils.getFileChooser();
+                fileChooser.setMultiSelectionEnabled(false);
 
-                    if (inputFiles.length > 1) {
-                        fileChooser.setFileFilter(new FileFilter() {
-                            private static final String DESCRIPTION = "Folders only";
+                if (inputFiles.length > 1) {
+                    fileChooser.setFileFilter(new FileFilter() {
+                        private static final String DESCRIPTION = "Folders only";
 
-                            public boolean accept(File file) {
-                                return file.isDirectory();
-                            }
-
-                            public String getDescription() {
-                                return DESCRIPTION;
-                            }
-                        });
-
-                        fileChooser.setSelectedFile(outputFile);
-                        fileChooser.setFileSelectionMode(1);
-                    } else {
-                        fileChooser.setFileFilter(null);
-                        fileChooser.setSelectedFile(outputFile);
-                    }
-
-                    int session = fileChooser.showSaveDialog(null);
-
-                    if (session == 0) {
-                        outputFile = fileChooser.getSelectedFile();
-
-                        if (inputFiles.length < 2) {
-                            renameOutputForFormat();
-                        } else {
-                            outputFileLabel.setText(outputFile.getAbsolutePath());
+                        public boolean accept(File file) {
+                            return file.isDirectory();
                         }
-                    }
 
-                    fileChooser.setFileSelectionMode(0);
-                    pack();
+                        public String getDescription() {
+                            return DESCRIPTION;
+                        }
+                    });
+
+                    fileChooser.setSelectedFile(outputFile);
+                    fileChooser.setFileSelectionMode(1);
+                } else {
+                    fileChooser.setFileFilter(null);
+                    fileChooser.setSelectedFile(outputFile);
                 }
+
+                int session = fileChooser.showSaveDialog(null);
+
+                if (session == 0) {
+                    outputFile = fileChooser.getSelectedFile();
+
+                    if (inputFiles.length < 2) {
+                        renameOutputForFormat();
+                    } else {
+                        outputFileLabel.setText(outputFile.getAbsolutePath());
+                    }
+                }
+
+                fileChooser.setFileSelectionMode(0);
+                pack();
             }
         });
         changeOutputButton.setEnabled(false);
@@ -186,19 +184,11 @@ public class ConverterFrame extends JFrame {
         JLabel outputFormatLabel = new JLabel(OUTPUT_FORMAT_LABEL);
 
         mp3RadioButton = new JRadioButton(MP3_RADIO_BUTTON);
-        mp3RadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                renameOutputForFormat();
-            }
-        });
+        mp3RadioButton.addActionListener(_ -> renameOutputForFormat());
         mp3RadioButton.setSelected(true);
 
         wavRadioButton = new JRadioButton(WAV_RADIO_BUTTON);
-        wavRadioButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                renameOutputForFormat();
-            }
-        });
+        wavRadioButton.addActionListener(_ -> renameOutputForFormat());
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(mp3RadioButton);
@@ -206,11 +196,7 @@ public class ConverterFrame extends JFrame {
 
         convertButton = new JButton(CONVERT_BUTTON);
         convertButton.setEnabled(false);
-        convertButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                convertAction();
-            }
-        });
+        convertButton.addActionListener(_ -> convertAction());
 
         JSeparator jSeparator = new JSeparator();
 

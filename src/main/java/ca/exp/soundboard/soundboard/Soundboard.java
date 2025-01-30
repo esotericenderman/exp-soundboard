@@ -60,26 +60,8 @@ public class Soundboard {
         soundboardEntries.add(new SoundboardEntry(file, keyNumbers));
     }
 
-    public SoundboardEntry getEntry(String fileName) {
-        for (SoundboardEntry entry : soundboardEntries) {
-            if (entry.getFileName().equals(fileName)) {
-                return entry;
-            }
-        }
-        return null;
-    }
-
     public void removeEntry(int index) {
         soundboardEntries.remove(index);
-    }
-
-    public void removeEntry(String fileName) {
-        for (SoundboardEntry entry : soundboardEntries) {
-            if (entry.getFileName().equals(fileName)) {
-                soundboardEntries.remove(entry);
-                break;
-            }
-        }
     }
 
     public ArrayList<SoundboardEntry> getSoundboardEntries() {
