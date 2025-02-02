@@ -5,3 +5,7 @@
 Revival of EXP Soundboard using extracted source files.
 
 This was an attempt to rework the EXP soundboard source files into working with `javafx`, as well as updating it to work on modern computers.
+
+## Topics
+
+kotlin java app apps soundboard soundboard-application soundboard-app soundboards exp-soundboard soundboard-applications soundboard-apps
