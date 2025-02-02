@@ -503,7 +503,7 @@ public class SettingsFrame extends JFrame {
                 if (i == 0) {
                     keyString.append(KeyEvent.getKeyText(keys.get(i)));
                 } else {
-                    keyString.append(" + " + KeyEvent.getKeyText(keys.get(i)));
+                    keyString.append(" + ").append(KeyEvent.getKeyText(keys.get(i)));
                 }
             }
 
