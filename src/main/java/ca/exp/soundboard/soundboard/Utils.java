@@ -355,7 +355,7 @@ public class Utils {
                             null,
                             PUSH_TO_TALK_KEY_CONFLICT,
                             ALERT_MESSAGE,
-                            0
+                            JOptionPane.ERROR_MESSAGE
                     );
                 }
             });
