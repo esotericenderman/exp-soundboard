@@ -43,7 +43,7 @@ public class UpdateChecker implements Runnable {
                         if (line.startsWith("CHANGELOG")) {
                             changeLogFound = true;
                         }
-                    } else if (changeLogFound) {
+                    } else {
                         if (line.startsWith("vers.") && !newVersionFound) {
                             newVersionFound = true;
                             patchlist = patchlist + '\n' + line;
