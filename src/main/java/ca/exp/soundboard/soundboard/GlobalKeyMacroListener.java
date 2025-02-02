@@ -105,7 +105,7 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
                     potentialCopies.remove(soundBoardEntry);
                 }
             }
-            potentialCopiesList = new ArrayList<SoundboardEntry>(potentialCopies);
+            potentialCopiesList = new ArrayList<>(potentialCopies);
 
             for (SoundboardEntry potentialCopy : potentialCopiesList) {
                 int matches = potentialCopy.matchesHowManyPressed(pressedKeys);
