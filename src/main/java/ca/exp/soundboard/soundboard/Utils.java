@@ -151,6 +151,7 @@ public class Utils {
         for (String mixer : MicInjector.getMixerNames(MicInjector.sourceDataLineInfo)) {
             if (mixer.equals(outputMixerName)) {
                 outputExists = true;
+                break;
             }
         }
 
