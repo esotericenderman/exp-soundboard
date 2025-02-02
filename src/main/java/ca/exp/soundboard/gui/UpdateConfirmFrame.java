@@ -17,8 +17,6 @@ import java.net.URISyntaxException;
 
 public class UpdateConfirmFrame extends JFrame {
 
-    private static final long serialVersionUID = -6700862565543741036L;
-
     private static final String TITLE = "Update Available!";
     private static final int DEFAULT_CLOSE_OPERATION = 2;
 
