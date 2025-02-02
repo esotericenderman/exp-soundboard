@@ -161,7 +161,7 @@ public class SoundboardFrame extends JFrame {
         autoPptCheckBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
                 boolean selected = autoPptCheckBox.isSelected();
-                Utils.setAutoPTThold(selected);
+                Utils.setAutoPTTHold(selected);
             }
         });
 
@@ -217,7 +217,7 @@ public class SoundboardFrame extends JFrame {
                 if (selected > -1) {
                     int index = getSelectedEntryIndex();
                     System.out.println("index " + index);
-                    SoundboardEntry entry = SoundboardFrame.soundboard.getEntry(index);
+                    SoundboardEntry entry = SoundboardFrame.soundboard.getEntries().get(index);
 
                     new SoundboardEntryEditor(thisFrameInstance, entry);
                 }
@@ -230,7 +230,7 @@ public class SoundboardFrame extends JFrame {
             int selected = table.getSelectedRow();
             if (selected > -1) {
                 int index = getSelectedEntryIndex();
-                SoundboardEntry entry = SoundboardFrame.soundboard.getEntry(index);
+                SoundboardEntry entry = SoundboardFrame.soundboard.getEntries().get(index);
                 if (SoundboardFrame.macroListener.isSpeedModKeyHeld()) {
                     entry.play(audioManager, true);
                 } else {
@@ -338,7 +338,7 @@ public class SoundboardFrame extends JFrame {
         loadPrefs();
     }
 
-    public static void main(String[] arguments) {
+    public static void main() {
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.OFF);
         logger.setUseParentHandlers(false);
@@ -353,8 +353,6 @@ public class SoundboardFrame extends JFrame {
 
         table.setModel(
                 new DefaultTableModel(entryArray, new String[] { "Sound Clip", "HotKeys", "File Locations", "Index" }) {
-                    private static final long serialVersionUID = 1L;
-
                     Class<?>[] columnTypes = { String.class, String.class, String.class, Integer.TYPE };
                     boolean[] columnEditables = new boolean[4];
 
@@ -421,9 +419,10 @@ public class SoundboardFrame extends JFrame {
 
         if (session == 0) {
             File file = fileChooser.getSelectedFile();
-            currentSoundboardFile = soundboard.saveAsJsonFile(file);
+            currentSoundboardFile = file;
+            soundboard.saveAsJsonFile(file);
 
-            setTitle(TITLE + currentSoundboardFile.getName());
+            setTitle(TITLE + file.getName());
         }
     }
 
@@ -484,13 +483,13 @@ public class SoundboardFrame extends JFrame {
         prefs.putInt("stopAllKey", Utils.getStopKey());
         prefs.putFloat("modplaybackspeed", Utils.getModifiedPlaybackSpeed());
         prefs.putInt("slowSoundKey", Utils.getModifiedSpeedKey());
-        prefs.putInt("modSpeedIncKey", Utils.getModspeedupKey());
-        prefs.putInt("modSpeedDecKey", Utils.getModspeeddownKey());
+        prefs.putInt("modSpeedIncKey", Utils.getModSpeedUpKeyCode());
+        prefs.putInt("modSpeedDecKey", Utils.getModSpeedDownKeyCode());
         prefs.putBoolean("updateCheckOnLaunch", updateCheck);
         prefs.put("micInjectorInput", micInjectorInputMixerName);
         prefs.put("micInjectorOutput", micInjectorOutputMixerName);
         prefs.putBoolean("micInjectorEnabled", useMicInjector);
-        prefs.putBoolean("autoPPTenabled", Utils.autoPTThold);
+        prefs.putBoolean("autoPPTenabled", Utils.autoPTTHold);
         prefs.put("autoPTTkeys", Utils.getPTTkeys().toString());
         prefs.putFloat("primaryOutputGain", AudioManager.getFirstOutputGain());
         prefs.putFloat("secondaryOutputGain", AudioManager.getSecondOutputGain());
@@ -518,40 +517,34 @@ public class SoundboardFrame extends JFrame {
             audioManager.setSecondaryOutputMixer(secondspeaker);
         }
 
-        String lastfile = preferences.get("lastSoundboardUsed", null);
+        String lastFile = preferences.get("lastSoundboardUsed", null);
 
-        if (lastfile != null) {
-            open(new File(lastfile));
+        if (lastFile != null) {
+            open(new File(lastFile));
         }
 
         float modSpeed = preferences.getFloat("modplaybackspeed", 0.5F);
         Utils.setModifiedPlaybackSpeed(modSpeed);
 
-        int slowkey = preferences.getInt("slowSoundKey", 35);
-        Utils.setModifiedSpeedKey(slowkey);
+        int slowKey = preferences.getInt("slowSoundKey", 35);
+        Utils.setModifiedSpeedKey(slowKey);
 
-        int stopkey = preferences.getInt("stopAllKey", 19);
-        Utils.setStopKey(stopkey);
+        int stopKey = preferences.getInt("stopAllKey", 19);
+        Utils.setStopKey(stopKey);
 
-        int incKey = preferences.getInt("modSpeedIncKey", 39);
-        Utils.setModspeedupKey(incKey);
+        int incrementKey = preferences.getInt("modSpeedIncKey", 39);
+        Utils.setModSpeedUpKeyCode(incrementKey);
 
-        int decKey = preferences.getInt("modSpeedDecKey", 37);
-        Utils.setModspeeddownKey(decKey);
-
-        updateCheck = preferences.getBoolean("updateCheckOnLaunch", true);
-
-        if (updateCheck) {
-            new Thread(new UpdateChecker()).start();
-        }
+        int decrementKey = preferences.getInt("modSpeedDecKey", 37);
+        Utils.setModSpeedDownKeyCode(decrementKey);
 
         float firstOutputGain = preferences.getFloat("primaryOutputGain", 0.0F);
         float secondOutputGain = preferences.getFloat("secondaryOutputGain", 0.0F);
-        float micinjectorOutputGain = preferences.getFloat("micInjectorOutputGain", 0.0F);
+        float micInjectorOutputGain = preferences.getFloat("micInjectorOutputGain", 0.0F);
 
         AudioManager.setFirstOutputGain(firstOutputGain);
         AudioManager.setSecondOutputGain(secondOutputGain);
-        Utils.setMicInjectorGain(micinjectorOutputGain);
+        Utils.setMicInjectorGain(micInjectorOutputGain);
 
         micInjectorInputMixerName = preferences.get("micInjectorInput", "");
         micInjectorOutputMixerName = preferences.get("micInjectorOutput", "");
@@ -559,10 +552,10 @@ public class SoundboardFrame extends JFrame {
 
         updateMicInjector();
 
-        boolean useautoptt = preferences.getBoolean("autoPPTenabled", false);
-        autoPptCheckBox.setSelected(useautoptt);
+        boolean useAutoPTT = preferences.getBoolean("autoPPTenabled", false);
+        autoPptCheckBox.setSelected(useAutoPTT);
 
-        Utils.setAutoPTThold(useautoptt);
+        Utils.setAutoPTTHold(useAutoPTT);
         String autoPTTKeys = preferences.get("autoPTTkeys", null);
 
         if (autoPTTKeys != null) {
@@ -606,7 +599,7 @@ public class SoundboardFrame extends JFrame {
                     }
                 }
             }
-        } else if (soundboard.getSoundboardEntries().size() > 0) {
+        } else if (!soundboard.getEntries().isEmpty()) {
             int option = JOptionPane.showConfirmDialog(null, "SoundboardStage has not been saved. Do you want to save?", "Save Reminder", 0);
 
             if (option == 0) {

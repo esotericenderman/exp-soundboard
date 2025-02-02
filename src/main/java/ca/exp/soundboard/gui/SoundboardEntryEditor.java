@@ -27,8 +27,6 @@ import java.util.ArrayList;
 
 public class SoundboardEntryEditor extends JFrame {
 
-    private static final long serialVersionUID = -8420285054567246768L;
-
     private static final String TITLE = "SoundboardStage Entry Editor";
 
     private static final int DEFAULT_CLOSE_OPERATION = 2;
@@ -54,7 +52,7 @@ public class SoundboardEntryEditor extends JFrame {
     SoundboardFrame soundboardFrame;
     Soundboard soundboard;
     SoundboardEntry soundboardEntry = null;
-    File soundfile;
+    File soundFile;
     private JTextField keysTextField;
     private NativeKeyInputGetter inputGetter;
     private JLabel selectedSoundClipLabel;
@@ -75,28 +73,28 @@ public class SoundboardEntryEditor extends JFrame {
         JButton selectButton = new JButton(SELECT_BUTTON);
         selectButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                JFileChooser filechooser = Utils.getFileChooser();
-                filechooser.setMultiSelectionEnabled(true);
-                filechooser.setFileFilter(new SoundboardEntryEditor.AudioClipFileFilter());
+                JFileChooser fileChooser = Utils.getFileChooser();
+                fileChooser.setMultiSelectionEnabled(true);
+                fileChooser.setFileFilter(new AudioClipFileFilter());
 
-                int session = filechooser.showDialog(null, SELECT_BUTTON);
+                int session = fileChooser.showDialog(null, SELECT_BUTTON);
                 if (session == 0) {
-                    File[] selected = filechooser.getSelectedFiles();
+                    File[] selected = fileChooser.getSelectedFiles();
                     if (selected.length > 1) {
                         multiAdd(selected);
                     } else {
-                        soundfile = selected[0];
+                        soundFile = selected[0];
                     }
-                    filechooser.setMultiSelectionEnabled(false);
-                    if (Utils.isFileSupported(soundfile)) {
+                    fileChooser.setMultiSelectionEnabled(false);
+                    if (Utils.isFileSupported(soundFile)) {
                         selectedSoundClipLabel
-                                .setText(soundfile.getAbsolutePath());
+                                .setText(soundFile.getAbsolutePath());
                     } else {
-                        soundfile = null;
-                        JOptionPane.showMessageDialog(null, soundfile.getName() + " uses an unsupported codec format.", UNSUPPORTED_FORMAT, 0);
+                        soundFile = null;
+                        JOptionPane.showMessageDialog(null, soundFile.getName() + " uses an unsupported codec format.", UNSUPPORTED_FORMAT, 0);
                     }
                 }
-                filechooser.setMultiSelectionEnabled(false);
+                fileChooser.setMultiSelectionEnabled(false);
                 pack();
             }
         });
@@ -180,21 +178,21 @@ public class SoundboardEntryEditor extends JFrame {
         this(soundboardframe);
 
         soundboardEntry = entry;
-        soundfile = new File(entry.getFilePath());
-        keyNums = entry.activationKeysNumbers;
-        selectedSoundClipLabel.setText(entry.getFilePath());
-        keysTextField.setText(entry.getActivationKeysAsReadableString());
+        soundFile       = entry.getFile();
+        keyNums         = entry.getActivationKeys();
+        selectedSoundClipLabel.setText(entry.getFile().getPath());
+        keysTextField.setText(entry.getActivationKeysString());
 
         pack();
     }
 
     private void submit() {
-        if (soundfile != null) {
+        if (soundFile != null) {
             if (soundboardEntry == null) {
-                soundboard.addEntry(soundfile, keyNums);
+                soundboard.addEntry(soundFile, keyNums);
                 soundboardFrame.updateSoundboardTable();
             } else {
-                soundboardEntry.setFile(soundfile);
+                soundboardEntry.setFile(soundFile);
                 soundboardEntry.setActivationKeys(keyNums);
                 soundboardFrame.updateSoundboardTable();
             }
@@ -286,12 +284,7 @@ public class SoundboardEntryEditor extends JFrame {
         }
     }
 
-    private class AudioClipFileFilter extends FileFilter {
-
-        private static final String DESCRIPTION = ".mp3 or uncompressed .wav";
-
-        private AudioClipFileFilter() {
-        }
+    private static class AudioClipFileFilter extends FileFilter {
 
         public boolean accept(File file) {
             if (file.isDirectory()) {
@@ -303,7 +296,7 @@ public class SoundboardEntryEditor extends JFrame {
         }
 
         public String getDescription() {
-            return DESCRIPTION;
+            return ".mp3 or uncompressed .wav";
         }
     }
 }
