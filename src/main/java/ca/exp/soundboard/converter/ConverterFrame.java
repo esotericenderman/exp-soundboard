@@ -6,22 +6,13 @@ import ws.schild.jave.info.MultimediaInfo;
 import ws.schild.jave.progress.EncoderProgressListener;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JSeparator;
+import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 public class ConverterFrame extends JFrame {
-
-    private static final int DEFAULT_CLOSE_OPERATION = 2;
 
     private static final int CONVERSION_PROGRESS_SCALE = 10;
     private static final int MAXIMUM_CONVERSION_PROGRESS = 1000;
@@ -87,7 +78,7 @@ public class ConverterFrame extends JFrame {
 
     public ConverterFrame() {
         setResizable(false);
-        setDefaultCloseOperation(DEFAULT_CLOSE_OPERATION);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(TITLE);
         setIconImage(SoundboardFrame.icon);
 
