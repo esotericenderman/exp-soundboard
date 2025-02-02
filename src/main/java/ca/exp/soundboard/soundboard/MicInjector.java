@@ -28,14 +28,11 @@ public class MicInjector extends Thread {
     Mixer inputMixer;
     Mixer outputMixer;
     FloatControl gainControl;
-    int userVolume;
     private String inputLineName;
     private String outputLineName;
     private SourceDataLine sourceDataLine;
     private TargetDataLine targetDataLine;
     private int bytesRead;
-    private boolean bypass;
-    private boolean muted = false;
     private boolean run = false;
     private long nextDrift;
 
