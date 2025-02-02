@@ -68,15 +68,14 @@ public class Utils {
     private static boolean playAll = true;
 
     public static MicInjector micInjector = new MicInjector();
-    public static String fileEncoding = System.getProperty("file.encoding");
-    private static ThreadGroup clipPlayerThreadGroup = new ThreadGroup("Clip Player Group");
+    private static final ThreadGroup clipPlayerThreadGroup = new ThreadGroup("Clip Player Group");
     private static float modifiedPlaybackSpeed;
     private static Robot robot;
     private static ArrayList<Integer> pttKeys = new ArrayList<>();
     private static int currentlyPlayingClipCount = 0;
 
-    private static ConcurrentHashMap<String, Long> lastNativeKeyPressMap = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, Long> lastRobotKeyPressMap = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Long> lastNativeKeyPressMap = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Long> lastRobotKeyPressMap = new ConcurrentHashMap<>();
 
     public static void playNewSoundClipThreaded(File file, final SourceDataLine primarySpeaker,
             final SourceDataLine secondarySpeaker) {
