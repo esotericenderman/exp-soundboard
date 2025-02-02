@@ -1,7 +1,6 @@
 package ca.exp.soundboard.gui;
 
 import ca.exp.soundboard.soundboard.MicInjector;
-import ca.exp.soundboard.soundboard.UpdateChecker;
 import ca.exp.soundboard.soundboard.Utils;
 import net.miginfocom.swing.MigLayout;
 import org.jnativehook.GlobalScreen;
@@ -56,9 +55,6 @@ public class SettingsFrame extends JFrame {
     private static final int FONT_STYLE = 1;
     private static final int FONT_SIZE = 11;
 
-    private static final String CHECK_FOR_UPDATE_ON_LAUNCH_CHECKBOX = "Check for update on launch.";
-    private static final String CHECK_FOR_UPDATE_BUTTON = "Check for Update";
-    private static final String NO_UPDATES_TEXT = "No Updates";
     private static final String PROJECT_WEBSITE_BUTTON = "Project Website";
     private static final String PROJECT_WEBSITE_URL = "https://sourceforge.net/projects/expsoundboard/";
 
@@ -146,25 +142,6 @@ public class SettingsFrame extends JFrame {
         });
         stopAllTextField.setColumns(10);
 
-        final JCheckBox checkForUpdateCheckbox = new JCheckBox(CHECK_FOR_UPDATE_ON_LAUNCH_CHECKBOX);
-        checkForUpdateCheckbox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                SoundboardFrame.updateCheck = !SoundboardFrame.updateCheck;
-                checkForUpdateCheckbox.setSelected(SoundboardFrame.updateCheck);
-            }
-        });
-        checkForUpdateCheckbox.setSelected(SoundboardFrame.updateCheck);
-        final JButton checkForUpdateButton = new JButton(CHECK_FOR_UPDATE_BUTTON);
-        checkForUpdateButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                if (UpdateChecker.isUpdateAvailable()) {
-                    SwingUtilities.invokeLater(new UpdateChecker());
-                } else {
-                    checkForUpdateButton.setText(NO_UPDATES_TEXT);
-                }
-
-            }
-        });
         JLabel lblExpenosa = new JLabel(COPYRIGHT);
 
         JButton btnProjectWebsite = new JButton(PROJECT_WEBSITE_BUTTON);
@@ -371,9 +348,7 @@ public class SettingsFrame extends JFrame {
         overlapHotkeyTextField.setText(NativeKeyEvent.getKeyText(Utils.getOverlapSwitchKey()));
 
         getContentPane().add(separatorA, "cell 0 13 9 1,growx,aligny top");
-        getContentPane().add(checkForUpdateCheckbox, "cell 0 15 3 1,alignx left,aligny top");
         getContentPane().add(btnProjectWebsite, "cell 4 15 3 1,alignx right,aligny top");
-        getContentPane().add(checkForUpdateButton, "cell 8 15,alignx right,aligny top");
         getContentPane().add(versionLabel, "cell 0 14,alignx left,aligny top");
         getContentPane().add(lblExpenosa, "cell 8 14,alignx right,aligny top");
         getContentPane().add(micInjectorSettingsLabel, "cell 0 9,alignx left,aligny top");
