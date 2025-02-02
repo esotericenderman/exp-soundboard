@@ -46,8 +46,6 @@ import java.util.HashSet;
 
 public class SettingsFrame extends JFrame {
 
-    private static final long serialVersionUID = -4758092886690912749L;
-
     private static final String TITLE = "Settings";
 
     private static final int DEFAULT_CLOSE_OPERATION = 2;
