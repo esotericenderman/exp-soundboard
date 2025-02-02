@@ -7,18 +7,7 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
-import javax.swing.JSpinner;
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JFormattedTextField;
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
-import javax.swing.JFrame;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JSeparator;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.DefaultFormatter;
@@ -46,8 +35,6 @@ import java.util.HashSet;
 public class SettingsFrame extends JFrame {
 
     private static final String TITLE = "Settings";
-
-    private static final int DEFAULT_CLOSE_OPERATION = 2;
 
     private static final String STOP_ALL_SOUNDS_LABEL = "'Stop All Sounds' hotkey:";
 
@@ -120,7 +107,7 @@ public class SettingsFrame extends JFrame {
         pttKeysInputGetter = new PttKeysNativeKeyInputGetter();
         overlapKeyInputGetter = new OverlapSwitchNativeKeyInputGetter();
 
-        setDefaultCloseOperation(DEFAULT_CLOSE_OPERATION);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(TITLE);
 
         JLabel stopAllSoundsLabel = new JLabel(STOP_ALL_SOUNDS_LABEL);
