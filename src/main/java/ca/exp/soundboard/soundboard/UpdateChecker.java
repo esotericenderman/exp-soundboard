@@ -89,7 +89,7 @@ public class UpdateChecker implements Runnable {
                         if (line.startsWith("CHANGELOG")) {
                             changelogFound = true;
                         }
-                    } else if (changelogFound && line.startsWith("vers.")) {
+                    } else if (line.startsWith("vers.")) {
                         String version = line.substring(line.indexOf('.') + 1, line.lastIndexOf(':')).trim();
                         float versionNo = Float.parseFloat(version);
                         if (versionNo > 0.5F) {
