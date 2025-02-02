@@ -491,6 +491,8 @@ public class Utils {
 
         SourceDataLine primarySpeaker = null;
         SourceDataLine secondarySpeaker = null;
+        SourceDataLine primarySpeaker;
+        SourceDataLine secondarySpeaker;
         boolean playing = true;
 
         public ClipPlayer(File file, SourceDataLine primarySpeaker, SourceDataLine secondarySpeaker) {
