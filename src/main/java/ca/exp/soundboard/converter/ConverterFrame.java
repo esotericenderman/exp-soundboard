@@ -296,7 +296,7 @@ public class ConverterFrame extends JFrame {
         }
 
         public void progress(int scaledConversionProgress) {
-            float progress = scaledConversionProgress / CONVERSION_PROGRESS_SCALE;
+            float progress = (float) scaledConversionProgress / CONVERSION_PROGRESS_SCALE;
             encodingProgressLabel.setText(String.valueOf(progress) + PERCENTAGE_SIGN);
 
             if (scaledConversionProgress >= MAXIMUM_CONVERSION_PROGRESS) {
