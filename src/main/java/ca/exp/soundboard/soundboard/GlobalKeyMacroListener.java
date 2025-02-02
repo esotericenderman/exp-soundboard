@@ -36,9 +36,9 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
 
         if (pressed == Utils.stopKey) {
             Utils.stopAllClips();
-        } else if (pressed == Utils.modspeedupKey) {
+        } else if (pressed == Utils.modSpeedUpKeyCode) {
             Utils.incrementModSpeedUp();
-        } else if (pressed == Utils.modspeeddownKey) {
+        } else if (pressed == Utils.modSpeedDownKeyCode) {
             Utils.decrementModSpeedDown();
         } else if (pressed == Utils.getOverlapSwitchKey()) {
             boolean overlap = Utils.isOverlapSameClipWhilePlaying();
@@ -81,7 +81,7 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
 
         ArrayList<SoundboardEntry> potentialCopies = new ArrayList<>();
 
-        for (SoundboardEntry entry : SoundboardFrame.soundboard.getSoundboardEntries()) {
+        for (SoundboardEntry entry : SoundboardFrame.soundboard.getEntries()) {
             int[] actKeys = entry.getActivationKeys();
 
             if (actKeys.length > 0 && entry.matchesPressed(pressedKeys)) {
@@ -97,7 +97,7 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
             ArrayList<SoundboardEntry> potentialCopiesList = new ArrayList<SoundboardEntry>(potentialCopies);
 
             for (SoundboardEntry soundBoardEntry : potentialCopiesList) {
-                int matches = soundBoardEntry.matchesHowManyPressed(pressedKeys);
+                int matches = soundBoardEntry.getMatchCount(pressedKeys);
 
                 if (matches > highest) {
                     highest = matches;
@@ -108,7 +108,7 @@ public class GlobalKeyMacroListener implements NativeKeyListener {
             potentialCopiesList = new ArrayList<>(potentialCopies);
 
             for (SoundboardEntry potentialCopy : potentialCopiesList) {
-                int matches = potentialCopy.matchesHowManyPressed(pressedKeys);
+                int matches = potentialCopy.getMatchCount(pressedKeys);
 
                 if (matches < highest) {
                     potentialCopies.remove(potentialCopy);
