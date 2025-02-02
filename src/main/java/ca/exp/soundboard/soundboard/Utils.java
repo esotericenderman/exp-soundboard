@@ -80,15 +80,9 @@ public class Utils {
 
     public static void playNewSoundClipThreaded(File file, final SourceDataLine primarySpeaker,
             final SourceDataLine secondarySpeaker) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Utils.ClipPlayer clipPlayer = new Utils.ClipPlayer(file, primarySpeaker, secondarySpeaker);
         SwingUtilities.invokeLater(() -> {
             ClipPlayer clipPlayer = new ClipPlayer(file, primarySpeaker, secondarySpeaker);
 
-                if (!Utils.overlapSameClipWhilePlaying) {
-                    Utils.stopFilePlaying(file);
-                }
             if (!Utils.overlapSameClipWhilePlaying) {
                 Utils.stopFilePlaying(file);
             }
