@@ -169,8 +169,6 @@ public class SoundboardFrame extends JFrame {
         table.setSelectionMode(0);
         table.setAutoCreateRowSorter(true);
         table.setModel(new DefaultTableModel(new Object[][] { new Object[2] }, new String[] { "Sound Clip", "HotKeys" }) {
-            private static final long serialVersionUID = 1L;
-
             Class<?>[] columnTypes = { String.class, String.class };
             boolean[] columnEditables = new boolean[2];
 
