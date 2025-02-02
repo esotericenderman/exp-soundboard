@@ -1,16 +1,21 @@
-package ca.exp.soundboard.soundboard;
+package ca.exp.soundboard.soundboard
 
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
+import java.awt.Toolkit
+import java.awt.event.KeyEvent
 
-public class KeyEventIntConverter {
-    public static String getKeyEventText(int keyCode) {
-        if (keyCode >= 96 && keyCode <= 105) {
-            String numpad = Toolkit.getProperty("AWT.numpad", "NumPad");
-            char character = (char) (keyCode - 96 + 48);
-            return numpad + " " + character;
+object KeyEventIntConverter {
+
+    @JvmStatic
+    fun getKeyEventText(keyCode: Int): String {
+        if (keyCode in 96..105) {
+            val numpad = Toolkit.getProperty("AWT.numpad", "NumPad")
+
+            val character = (keyCode - 96 + 48).toChar()
+            return "$numpad $character"
         }
 
-        return KeyEvent.getKeyText(keyCode);
+        return KeyEvent.getKeyText(
+            keyCode
+        )
     }
 }
