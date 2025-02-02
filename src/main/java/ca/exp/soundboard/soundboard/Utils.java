@@ -304,10 +304,11 @@ public class Utils {
     public static boolean checkAndUseAutoPPThold() {
         if (!autoPTThold || pttKeys.size() == 0) {
             return false;
+            return;
         }
 
         if (SoundboardFrame.soundboard.entriesContainPTTKeys(pttKeys)) {
-            return false;
+            return;
         }
 
         ArrayList<Integer> pressed = SoundboardFrame.macroListener.getPressedNativeKeys();
@@ -331,7 +332,6 @@ public class Utils {
             }
         }
 
-        return true;
     }
 
     public static boolean checkAndReleaseHeldPPTKeys() {
