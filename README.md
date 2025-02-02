@@ -1,4 +1,4 @@
-# EXP soundboard
+# EXP Soundboard
 
 <sup>Forked from <a href="https://github.com/CardboardBread/EXP-soundboard">CardboardBread/EXP-Soundboard</a></sup>
 
