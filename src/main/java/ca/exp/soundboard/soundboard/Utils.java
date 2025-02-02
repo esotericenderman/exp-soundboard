@@ -41,7 +41,7 @@ public class Utils {
     private static final int CHANNEL_COUNT = 2;
     private static final int FRAME_SIZE = 4;
 
-    private static final InputStream loaderfile = ClipPlayer.class.getResourceAsStream("/loader.mp3");
+    private static final InputStream LOADER_FILE = ClipPlayer.class.getResourceAsStream("/loader.mp3");
 
     public static final String PREFERENCES_NODE_NAME = "Expenosa's SoundboardStage";
 
@@ -179,8 +179,8 @@ public class Utils {
 
     public static void startMp3Decoder() {
         try {
-            AudioSystem.getAudioFileFormat(loaderfile);
-            AudioInputStream stream = AudioSystem.getAudioInputStream(loaderfile);
+            AudioSystem.getAudioFileFormat(LOADER_FILE);
+            AudioInputStream stream = AudioSystem.getAudioInputStream(LOADER_FILE);
             stream.close();
         } catch (UnsupportedAudioFileException | IOException exception) {
             exception.printStackTrace();
