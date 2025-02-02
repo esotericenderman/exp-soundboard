@@ -342,6 +342,10 @@ public class SoundboardFrame extends JFrame {
     }
 
     public static void main(String[] arguments) {
+        Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+        logger.setLevel(Level.OFF);
+        logger.setUseParentHandlers(false);
+
         Utils.initGlobalKeyLibrary();
         Utils.startMp3Decoder();
         new SoundboardFrame().setVisible(true);
