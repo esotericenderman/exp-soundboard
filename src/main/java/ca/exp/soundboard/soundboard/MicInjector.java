@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MicInjector extends Thread {
 
-    private static float frameRate = 44100.0F;
+    private static final float frameRate = 44100.0F;
 
     private static final AudioFormat signedFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, frameRate, 16, 2, 4, frameRate, false);
     public static final DataLine.Info targetDataLineInfo = new DataLine.Info(TargetDataLine.class, signedFormat, 8192);
