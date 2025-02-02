@@ -299,8 +299,8 @@ public class SettingsFrame extends JFrame {
         });
         stopAllTextField.setText(NativeKeyEvent.getKeyText(Utils.getStopKey()));
         slowKeyTextField.setText(NativeKeyEvent.getKeyText(Utils.getModifiedSpeedKey()));
-        increaseModSpeedHotKeyTextField.setText(NativeKeyEvent.getKeyText(Utils.getModspeedupKey()));
-        decreaseModSpeedHotKeyTextField.setText(NativeKeyEvent.getKeyText(Utils.getModspeeddownKey()));
+        increaseModSpeedHotKeyTextField.setText(NativeKeyEvent.getKeyText(Utils.getModSpeedUpKeyCode()));
+        decreaseModSpeedHotKeyTextField.setText(NativeKeyEvent.getKeyText(Utils.getModSpeedDownKeyCode()));
         pttKeysInputGetter.updateTextField();
         overlapClipsCheckbox.setSelected(Utils.isOverlapSameClipWhilePlaying());
         getContentPane().setLayout(new MigLayout("", "[101px][20px][45px][13px][71px][4px][34px,grow][10px][135px]",
@@ -528,14 +528,14 @@ public class SettingsFrame extends JFrame {
     }
 
     private class IncKeyNativeKeyInputGetter implements NativeKeyListener {
-        int key = Utils.getModspeedupKey();
+        int key = Utils.getModSpeedUpKeyCode();
 
         private IncKeyNativeKeyInputGetter() {
         }
 
         public void nativeKeyPressed(NativeKeyEvent event) {
             key = event.getKeyCode();
-            Utils.setModspeedupKey(key);
+            Utils.setModSpeedUpKeyCode(key);
             updateTextField();
         }
 
@@ -552,14 +552,14 @@ public class SettingsFrame extends JFrame {
     }
 
     private class DecKeyNativeKeyInputGetter implements NativeKeyListener {
-        int key = Utils.getModspeeddownKey();
+        int key = Utils.getModSpeedDownKeyCode();
 
         private DecKeyNativeKeyInputGetter() {
         }
 
         public void nativeKeyPressed(NativeKeyEvent event) {
             key = event.getKeyCode();
-            Utils.setModspeeddownKey(key);
+            Utils.setModSpeedDownKeyCode(key);
             updateTextField();
         }
 
