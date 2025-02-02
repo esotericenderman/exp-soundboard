@@ -69,8 +69,6 @@ public class ConverterFrame extends JFrame {
     private static final String MP3_FILE_ENDING = PERIOD + "mp3";
     private static final String WAV_FILE_ENDING = PERIOD + "wav";
 
-    private static final long serialVersionUID = -6720455160041920802L;
-
     private File[] inputFiles;
     private File outputFile;
 
