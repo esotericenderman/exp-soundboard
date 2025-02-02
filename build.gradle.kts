@@ -2,6 +2,7 @@ plugins {
     id("com.gradleup.shadow") version "9.0.0-beta6"
 
     application
+    kotlin("jvm")
 }
 
 repositories {
@@ -16,6 +17,7 @@ dependencies {
     implementation(libs.jave)
     implementation(libs.miglayout)
     implementation(libs.apple)
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 application {
