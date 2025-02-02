@@ -301,9 +301,8 @@ public class Utils {
         return null;
     }
 
-    public static boolean checkAndUseAutoPPThold() {
-        if (!autoPTThold || pttKeys.size() == 0) {
-            return false;
+    public static void checkAndUseAutoPPTHold() {
+        if (!autoPTTHold || pttKeys.isEmpty()) {
             return;
         }
 
@@ -337,6 +336,8 @@ public class Utils {
     public static boolean checkAndReleaseHeldPPTKeys() {
         if (!autoPTThold) {
             return false;
+    public static void checkAndReleaseHeldPPTKeys() {
+            return;
         }
 
         if (SoundboardFrame.soundboard.entriesContainPTTKeys(pttKeys)) {
@@ -351,7 +352,7 @@ public class Utils {
                 }
             });
 
-            return false;
+            return;
         }
 
         if (currentlyPlayingClipCount == 0) {
