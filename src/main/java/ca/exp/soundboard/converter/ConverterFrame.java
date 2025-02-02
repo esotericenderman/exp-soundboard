@@ -72,18 +72,18 @@ public class ConverterFrame extends JFrame {
     private File[] inputFiles;
     private File outputFile;
 
-    private JLabel inputFileLabel;
-    private JLabel outputFileLabel;
+    private final JLabel inputFileLabel;
+    private final JLabel outputFileLabel;
 
-    private JButton changeOutputButton;
+    private final JButton changeOutputButton;
 
-    private JRadioButton mp3RadioButton;
-    private JRadioButton wavRadioButton;
+    private final JRadioButton mp3RadioButton;
+    private final JRadioButton wavRadioButton;
 
     private JLabel encodingProgressLabel;
     private JLabel encodingMessageLabel;
 
-    private JButton convertButton;
+    private final JButton convertButton;
 
     public ConverterFrame() {
         setResizable(false);
