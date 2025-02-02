@@ -514,7 +514,7 @@ public class Utils {
             Utils.playAll = true;
 
             AudioInputStream clip = null;
-            AudioFormat clipFormat = null;
+            AudioFormat clipFormat;
 
             try {
                 clip = AudioSystem.getAudioInputStream(file);
