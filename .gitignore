@@ -75,3 +75,5 @@ gradlew.bat
 # Ignore Gradle build output directory
 build
 *.jar
+
+.kotlin/sessions/kotlin-compiler-*.salive
