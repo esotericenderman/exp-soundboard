@@ -185,7 +185,7 @@ public class Utils {
         }
     }
 
-    public static boolean initGlobalKeyLibrary() {
+    public static void initGlobalKeyLibrary() {
         try {
             GlobalScreen.registerNativeHook();
         } catch (NativeHookException exception) {
@@ -193,22 +193,16 @@ public class Utils {
             System.err.println(exception.getMessage());
             JOptionPane.showMessageDialog(null, exception.getMessage(), GLOBAL_HOTKEY_ERROR, 0);
         }
-
-        return true;
     }
 
-    public static boolean deregisterGlobalKeyLibrary() {
+    public static void deregisterGlobalKeyLibrary() {
         if (GlobalScreen.isNativeHookRegistered()) {
             try {
                 GlobalScreen.unregisterNativeHook();
             } catch (NativeHookException exception) {
                 exception.printStackTrace();
             }
-
-            return true;
         }
-
-        return false;
     }
 
     public static boolean isFileSupported(File file) {
