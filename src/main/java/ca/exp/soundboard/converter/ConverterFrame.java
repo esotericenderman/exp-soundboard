@@ -27,7 +27,7 @@ public class ConverterFrame extends JFrame {
     private static final int MAXIMUM_CONVERSION_PROGRESS = 1000;
     private static final int ERROR_CONVERSION_PROGRESS = 1001;
 
-    private static final String TITLE = "EXP soundboard : Audio Converter";
+    private static final String TITLE = "EXP Soundboard : Audio Converter";
 
     private static final String INPUT_FILES_LABEL = "Input Files:";
     private static final String OUTPUT_FILE_LABEL = "Output File:";
