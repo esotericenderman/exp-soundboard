@@ -83,13 +83,17 @@ public class Utils {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Utils.ClipPlayer clipPlayer = new Utils.ClipPlayer(file, primarySpeaker, secondarySpeaker);
+        SwingUtilities.invokeLater(() -> {
+            ClipPlayer clipPlayer = new ClipPlayer(file, primarySpeaker, secondarySpeaker);
 
                 if (!Utils.overlapSameClipWhilePlaying) {
                     Utils.stopFilePlaying(file);
                 }
-
-                clipPlayer.start();
+            if (!Utils.overlapSameClipWhilePlaying) {
+                Utils.stopFilePlaying(file);
             }
+
+            clipPlayer.start();
         });
     }
 
