@@ -22,8 +22,6 @@ public class AudioLevelsFrame extends JFrame {
     private static final String SECONDARY_OUTPUT_GAIN_LABEL = "Secondary Output Gain:";
     private static final String MIC_INJECTOR_GAIN_LABEL = "Mic Injector Gain:";
 
-    private static final long serialVersionUID = 464347549019590824L;
-
     private static AudioLevelsFrame instance = null;
     private JSlider primarySlider;
     private JSlider secondarySlider;
