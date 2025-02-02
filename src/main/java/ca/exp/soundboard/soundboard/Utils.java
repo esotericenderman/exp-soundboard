@@ -59,12 +59,12 @@ public class Utils {
 
     public static int stopKey = 19;
     public static int slowKey = 35;
-    public static int modspeedupKey = 39;
-    public static int modspeeddownKey = 37;
+    public static int modSpeedUpKeyCode = 39;
+    public static int modSpeedDownKeyCode = 37;
     private static int overlapSwitchKey = 36;
 
     public static boolean overlapSameClipWhilePlaying = true;
-    public static boolean autoPTThold = true;
+    public static boolean autoPTTHold = true;
     private static boolean playAll = true;
 
     public static MicInjector micInjector = new MicInjector();
@@ -136,7 +136,7 @@ public class Utils {
         boolean outputExists = false;
 
         if (isMicInjectorRunning()) {
-            stopMicInjector();
+            micInjector.stopRunning();
         }
 
         for (String mixer : MicInjector.getMixerNames(MicInjector.targetDataLineInfo)) {
@@ -227,20 +227,20 @@ public class Utils {
         modifiedPlaybackFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, newSampleRate, SAMPLE_SIZE_IN_BITS, CHANNEL_COUNT, FRAME_SIZE, newSampleRate, false);
     }
 
-    public static int getModspeedupKey() {
-        return modspeedupKey;
+    public static int getModSpeedUpKeyCode() {
+        return modSpeedUpKeyCode;
     }
 
-    public static void setModspeedupKey(int modspeedupKey) {
-        Utils.modspeedupKey = modspeedupKey;
+    public static void setModSpeedUpKeyCode(int modSpeedUpKeyCode) {
+        Utils.modSpeedUpKeyCode = modSpeedUpKeyCode;
     }
 
-    public static int getModspeeddownKey() {
-        return modspeeddownKey;
+    public static int getModSpeedDownKeyCode() {
+        return modSpeedDownKeyCode;
     }
 
-    public static void setModspeeddownKey(int modspeeddownKey) {
-        Utils.modspeeddownKey = modspeeddownKey;
+    public static void setModSpeedDownKeyCode(int modSpeedDownKeyCode) {
+        Utils.modSpeedDownKeyCode = modSpeedDownKeyCode;
     }
 
     public static int getOverlapSwitchKey() {
@@ -317,8 +317,8 @@ public class Utils {
         for (int key : pttKeys) {
             boolean pressedAlready = false;
 
-            for (int nativekey : pressed) {
-                if (KeyEventIntConverter.getKeyEventText(key).toLowerCase().equals(NativeKeyEvent.getKeyText(nativekey).toLowerCase())) {
+            for (int nativeKey : pressed) {
+                if (KeyEventIntConverter.getKeyEventText(key).toLowerCase().equals(NativeKeyEvent.getKeyText(nativeKey).toLowerCase())) {
                     pressedAlready = true;
                     break;
                 }
@@ -333,10 +333,8 @@ public class Utils {
 
     }
 
-    public static boolean checkAndReleaseHeldPPTKeys() {
-        if (!autoPTThold) {
-            return false;
     public static void checkAndReleaseHeldPPTKeys() {
+        if (!autoPTTHold) {
             return;
         }
 
@@ -366,7 +364,6 @@ public class Utils {
             }
         }
 
-        return true;
     }
 
     public static ArrayList<Integer> getPTTkeys() {
@@ -377,8 +374,8 @@ public class Utils {
         pttKeys = new ArrayList<Integer>(pTTkeys);
     }
 
-    public static void setAutoPTThold(boolean autoPTThold) {
-        Utils.autoPTThold = autoPTThold;
+    public static void setAutoPTTHold(boolean autoPTTHold) {
+        Utils.autoPTTHold = autoPTTHold;
     }
 
     public static synchronized void incrementCurrentClipCount() {
@@ -489,8 +486,6 @@ public class Utils {
     private static class ClipPlayer extends Thread {
         File file;
 
-        SourceDataLine primarySpeaker = null;
-        SourceDataLine secondarySpeaker = null;
         SourceDataLine primarySpeaker;
         SourceDataLine secondarySpeaker;
         boolean playing = true;
@@ -546,7 +541,7 @@ public class Utils {
                         exception.printStackTrace();
                     }
 
-                    Utils.checkAndUseAutoPPThold();
+                    Utils.checkAndUseAutoPPTHold();
 
                     if (bytesRead > 0) {
                         primarySpeaker.write(buffer, 0, bytesRead);
