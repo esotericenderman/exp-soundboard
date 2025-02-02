@@ -1,5 +1,7 @@
 # EXP Soundboard
 
+[![Project Status: Abandoned](./assets/images/badges/status.svg)](./)
+
 <sup>Forked from <a href="https://github.com/CardboardBread/EXP-soundboard">CardboardBread/EXP-Soundboard</a></sup>
 
 Revival of EXP Soundboard using extracted source files.
